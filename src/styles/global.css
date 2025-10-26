@@ -1,1 +1,99 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+/* Configuración del tema con Tailwind CSS v4 */
+@theme {
+  /* Colores personalizados */
+  --color-lime-custom: #A3E635;
+  --color-lime-green: #7AAC28;
+  --color-lime-light: #BEF264;
+  --color-lime-lightest: #F7FEE7;
+  --color-gray-dark: #1F2937;
+  
+  /* Fuentes */
+  --font-archivo: "Archivo Black", sans-serif;
+  --font-inter: Inter, sans-serif;
+  
+  /* Sombras personalizadas */
+  --shadow-card: 0px 4px 7.1px 6px #bef264;
+}
+
+/* Estilos globales personalizados */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-inter antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-archivo;
+  }
+}
+
+/* Animaciones personalizadas */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-in;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Smooth transitions globales */
+* {
+  @apply transition-colors duration-200;
+}
