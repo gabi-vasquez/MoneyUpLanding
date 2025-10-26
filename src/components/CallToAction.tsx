@@ -1,5 +1,6 @@
 import { memo, useCallback, useMemo, useState } from 'react';
 import { useIntersection } from '../hooks/useIntersection';
+import { cn } from '../lib/utils';
 
 interface CallToActionProps {
     phoneImage: string;
@@ -79,10 +80,13 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
 
                 {/* Botones */}
                 <div
-                    className={`flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 transition-all duration-1000 delay-300 ${isIntersecting
-                        ? 'opacity-100 translate-y-0'
-                        : 'opacity-0 translate-y-10'
-                        }`}
+                    className={cn(
+                        'flex flex-col sm:flex-row gap-6 justify-center items-center mb-16',
+                        'transition-all duration-1000 delay-300',
+                        isIntersecting
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
+                    )}
                 >
                     {buttons.map((button) => (
                         <button
@@ -90,10 +94,17 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
                             onClick={() => handleButtonClick(button.id)}
                             onMouseEnter={() => handleMouseEnter(button.id)}
                             onMouseLeave={handleMouseLeave}
-                            className={`${button.bgColor} ${button.hoverColor} ${button.textColor} 
-                px-12 py-5 rounded-2xl font-archivo text-2xl md:text-3xl 
-                transition-all duration-300 transform 
-                ${hoveredButton === button.id ? 'scale-105 shadow-2xl' : 'shadow-lg'}`}
+                            className={cn(
+                                // Base styles
+                                'px-12 py-5 rounded-2xl font-archivo text-2xl md:text-3xl',
+                                'transition-all duration-300 transform',
+                                // Button-specific colors
+                                button.bgColor,
+                                button.hoverColor,
+                                button.textColor,
+                                // Conditional hover state
+                                hoveredButton === button.id ? 'scale-105 shadow-2xl' : 'shadow-lg'
+                            )}
                         >
                             {button.label}
                         </button>
