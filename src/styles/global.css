@@ -1,23 +1,31 @@
 @import 'tailwindcss';
 
-/* Configuración del tema con Tailwind CSS v4 */
 @theme {
-  /* Colores personalizados */
   --color-lime-custom: #A3E635;
   --color-lime-green: #7AAC28;
   --color-lime-light: #BEF264;
   --color-lime-lightest: #F7FEE7;
   --color-gray-dark: #1F2937;
   
-  /* Fuentes */
   --font-archivo: "Archivo Black", sans-serif;
   --font-inter: Inter, sans-serif;
   
-  /* Sombras personalizadas */
   --shadow-card: 0px 4px 7.1px 6px #bef264;
 }
 
-/* Estilos globales personalizados */
+@layer theme {
+  :root {
+    --navbar-height: 88px;
+    --navbar-padding-bottom: 96px;
+    --navbar-wave-height: 115px;
+    --navbar-total-height: calc(var(--navbar-height) + var(--navbar-padding-bottom));
+    --navbar-content-offset: calc(var(--navbar-total-height) + 20px);
+    
+    --footer-wave-height: 100px;
+    --footer-spacing: var(--footer-wave-height);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -32,7 +40,6 @@
   }
 }
 
-/* Animaciones personalizadas */
 @layer utilities {
   .animate-fade-in {
     animation: fadeIn 0.6s ease-in;
@@ -93,7 +100,31 @@
   }
 }
 
-/* Smooth transitions globales */
 * {
   @apply transition-colors duration-200;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1 1 auto;
+  padding-top: var(--navbar-content-offset);
+  min-height: calc(100vh - var(--navbar-content-offset));
+}
+
+.footer-container {
+  margin-top: var(--footer-spacing);
+  flex-shrink: 0;
+}
+
+.footer-wave-container {
+  transform: translateY(-100%);
+}
+
+.footer-wave {
+  height: var(--footer-wave-height);
 }

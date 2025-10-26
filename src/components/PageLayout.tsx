@@ -16,12 +16,22 @@ interface PageLayoutProps {
 /**
  * Layout reutilizable para todas las páginas
  * 
+ * Arquitectura Inteligente:
+ * - Usa Flexbox para layout adaptativo automático
+ * - CSS Variables para dimensiones dinámicas (ver global.css)
+ * - Sin valores hardcodeados - todo se adapta automáticamente
+ * - Principio DRY: cambiar dimensiones solo requiere actualizar variables CSS
+ * 
  * Características:
  * - Envuelve el contenido con AppProvider para estado global
  * - Incluye Navbar y Footer consistentes
  * - Incluye ScrollProgress para feedback visual
- * - Sigue principio DRY (Don't Repeat Yourself)
  * - Single Responsibility: Solo se encarga del layout general
+ * 
+ * Clases CSS utilizadas:
+ * - .page-container: Flexbox container (min-height: 100vh)
+ * - .main-content: Padding dinámico + flex: 1 (ocupa espacio disponible)
+ * - .footer-container: Margin dinámico + flex-shrink: 0
  * 
  * @param children - Contenido específico de cada página
  * @param logoUrl - URL del logo para el Navbar
@@ -40,12 +50,12 @@ export default function PageLayout({
 }: PageLayoutProps) {
     return (
         <AppProvider>
-            <div className="min-h-screen bg-white">
+            <div className="page-container bg-white">
                 <ScrollProgress />
                 <Navbar logoUrl={logoUrl} />
-
-                <main>{children}</main>
-
+                <main className="main-content">
+                    {children}
+                </main>
                 <Footer
                     vectorBg={vectorBg}
                     twitterIcon={twitterIcon}

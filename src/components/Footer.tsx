@@ -22,6 +22,12 @@ interface SocialLink {
  * - useMemo: Cachea la lista de redes sociales
  * - useCallback: Memoriza el handler de clicks
  * 
+ * Layout Inteligente:
+ * - Usa CSS Variables para dimensiones dinámicas
+ * - Clase .footer-container para espaciado adaptativo
+ * - Clase .footer-wave para altura dinámica de la onda
+ * - Sin valores hardcodeados - se adapta automáticamente
+ * 
  * Características:
  * - Diseño responsive (mobile-first)
  * - Onda decorativa SVG en la parte superior
@@ -66,15 +72,19 @@ const Footer = memo(({ vectorBg, twitterIcon, instagramIcon, facebookIcon }: Foo
 
     return (
         <footer
-            className="relative bg-gray-dark text-white"
+            className="footer-container relative bg-gray-dark text-white"
             role="contentinfo"
             aria-label="Footer"
         >
-            {/* Onda decorativa superior - Curva en U hacia abajo */}
-            <div className="absolute top-0 left-0 w-full overflow-hidden leading-none" style={{ transform: 'translateY(-99%)' }}>
+            {/* 
+                Onda decorativa superior - Curva en U hacia abajo
+                - .footer-wave-container: Posiciona la onda con translateY(-100%)
+                - .footer-wave: Altura dinámica basada en CSS Variables
+                El margin-top del footer-container (100px) da espacio para esta onda
+            */}
+            <div className="footer-wave-container absolute top-0 left-0 w-full overflow-hidden leading-none">
                 <svg
-                    className="relative block w-full"
-                    style={{ height: '100px' }}
+                    className="footer-wave relative block w-full"
                     viewBox="0 0 1440 100"
                     preserveAspectRatio="none"
                     xmlns="http://www.w3.org/2000/svg"
