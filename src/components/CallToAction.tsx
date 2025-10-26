@@ -111,7 +111,7 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
                                 'px-12 py-5 rounded-2xl font-archivo text-2xl md:text-3xl',
                                 'transition-all duration-300 transform',
                                 // Conditional hover state
-                                hoveredButton === button.id ? 'scale-105 shadow-2xl' : 'shadow-lg'
+                                hoveredButton === button.id ? 'scale-105 shadow-2xl' : 'shadow-lg',
                             )}
                             style={{
                                 backgroundColor: button.bgColor,

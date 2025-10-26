@@ -49,7 +49,7 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
             className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
             style={{
                 paddingBottom: isScrolled ? '0' : '96px',
-                backgroundColor: 'var(--navbar-bg)',
+                backgroundColor: '#A3E635',
             }}
         >
             {/* Contenido principal del navbar */}
@@ -251,7 +251,7 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                 >
                     <path
                         d="M0,20 C213,80 427,120 640,100 C853,80 1067,40 1280,20 L1280,187 L0,187 Z"
-                        fill="white"
+                        style={{ fill: 'var(--bg-primary)' }}
                     />
                 </svg>
             </div>
