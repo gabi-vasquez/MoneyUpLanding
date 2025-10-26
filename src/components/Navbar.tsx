@@ -35,21 +35,23 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
             }}
         >
             {/* Contenido principal del navbar */}
-            <div className="max-w-[1280px] mx-auto px-8 md:px-[124px] relative z-10">
-                <div
-                    className="flex items-center justify-between transition-all duration-300 h-20">
-                    {/* Logo */}
-                    <a href="/" className="shrink-0">
-                        <img
-                            src={logoUrl}
-                            alt="MoneyUp Logo"
-                            className="h-[34px] w-auto"
-                            style={{ maxWidth: '194px' }}
-                        />
-                    </a>
+            <div className="max-w-[1440px] mx-auto px-8 md:px-12 relative z-10">
+                {/* Desktop Grid Layout */}
+                <div className="hidden md:grid items-center justify-center transition-all duration-300 h-20" style={{ gridTemplateColumns: '1fr auto 1fr' }}>
+                    {/* Logo - Columna izquierda */}
+                    <div className="flex justify-center">
+                        <a href="/" className="shrink-0">
+                            <img
+                                src={logoUrl}
+                                alt="MoneyUp Logo"
+                                className="h-[34px] w-auto"
+                                style={{ maxWidth: '194px' }}
+                            />
+                        </a>
+                    </div>
 
-                    {/* Links de navegación - Desktop */}
-                    <div className="hidden md:flex items-center absolute left-1/2 transform -translate-x-1/2" style={{ gap: '138px' }}>
+                    {/* Links de navegación - Columna central (centrado perfecto) */}
+                    <div className="flex items-center justify-center gap-12">
                         {navItems.map((item) => (
                             <a
                                 key={item.href}
@@ -62,8 +64,8 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                         ))}
                     </div>
 
-                    {/* Botón Descargar */}
-                    <div className="hidden md:block shrink-0">
+                    {/* Botón Descargar - Columna derecha */}
+                    <div className="flex justify-center">
                         <a
                             href="/download/"
                             className="font-inter font-bold text-white hover:opacity-90 transition-opacity duration-200 inline-flex items-center justify-center"
@@ -80,11 +82,24 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                             Descargar
                         </a>
                     </div>
+                </div>
+
+                {/* Mobile Layout */}
+                <div className="md:hidden flex items-center justify-between transition-all duration-300 h-20">
+                    {/* Logo */}
+                    <a href="/" className="shrink-0">
+                        <img
+                            src={logoUrl}
+                            alt="MoneyUp Logo"
+                            className="h-[34px] w-auto"
+                            style={{ maxWidth: '194px' }}
+                        />
+                    </a>
 
                     {/* Botón menú móvil */}
                     <button
                         onClick={toggleMenu}
-                        className="md:hidden text-white p-2"
+                        className="text-white p-2"
                         aria-label="Toggle menu"
                     >
                         <svg
