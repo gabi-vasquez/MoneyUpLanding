@@ -175,7 +175,7 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
 
                 {/* Menú móvil */}
                 {state.isMenuOpen && (
-                    <div className="md:hidden pb-6 pt-2">
+                    <div className="md:hidden pb-6 pt-2 relative z-20">
                         <div className="flex flex-col space-y-4">
                             {navItems.map((item) => {
                                 const isActive = isLinkActive(item.sectionId);
@@ -200,7 +200,7 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                                     className="text-white hover:opacity-80 transition-opacity duration-200 p-3 rounded-lg bg-white/10"
                                     aria-label={state.theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'}
                                 >
-                                    {state.theme === 'light' ? (
+                                    {state.theme === 'dark' ? (
                                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                                         </svg>
@@ -217,7 +217,7 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                                     className="text-white hover:opacity-80 transition-opacity duration-200 px-4 py-3 rounded-lg font-inter font-semibold bg-white/10"
                                     aria-label={state.language === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}
                                 >
-                                    {state.language === 'en' ? '🇪🇸 ES' : '🇺🇸 EN'}
+                                    {state.language === 'en' ? '🇺🇸 EN' : '🇪🇸 ES'}
                                 </button>
                             </div>
 
@@ -239,8 +239,9 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                 style={{
                     top: '88px',
                     height: '115px',
-                    opacity: isScrolled ? 0 : 1,
-                    visibility: isScrolled ? 'hidden' : 'visible'
+                    opacity: isScrolled || state.isMenuOpen ? 0 : 1,
+                    visibility: isScrolled || state.isMenuOpen ? 'hidden' : 'visible',
+                    zIndex: 0
                 }}
             >
                 <svg
