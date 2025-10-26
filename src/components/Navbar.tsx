@@ -37,15 +37,16 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
 
     return (
         <nav
-            className="fixed top-0 left-0 right-0 z-50"
+            className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
             style={{
                 backgroundColor: '#A3E635',
-                paddingBottom: '96px'
+                paddingBottom: isScrolled ? '0' : '96px'
             }}
         >
             {/* Contenido principal del navbar */}
             <div className="max-w-[1280px] mx-auto px-8 md:px-[124px] relative z-10">
-                <div className="flex items-center justify-between" style={{ height: '88px', paddingTop: '30px' }}>
+                <div
+                    className="flex items-center justify-between transition-all duration-300 h-20">
                     {/* Logo */}
                     <div className="shrink-0">
                         <img
@@ -140,10 +141,12 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
 
             {/* Onda decorativa SVG en la parte inferior */}
             <div
-                className="absolute left-0 right-0 w-full pointer-events-none overflow-visible"
+                className="absolute left-0 right-0 w-full pointer-events-none overflow-visible transition-all duration-300"
                 style={{
                     top: '88px',
-                    height: '115px'
+                    height: '115px',
+                    opacity: isScrolled ? 0 : 1,
+                    visibility: isScrolled ? 'hidden' : 'visible'
                 }}
             >
                 <svg
