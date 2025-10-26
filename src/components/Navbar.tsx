@@ -37,37 +37,33 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-lime-custom shadow-lg' : 'bg-lime-custom'
-                }`}
+            className="fixed top-0 left-0 right-0 z-50"
+            style={{
+                backgroundColor: '#A3E635',
+                paddingBottom: '96px'
+            }}
         >
-            {/* Onda decorativa SVG */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-                <svg
-                    viewBox="0 0 1280 187"
-                    className="absolute bottom-0 w-full"
-                    preserveAspectRatio="none"
-                >
-                    <path
-                        d="M0 0C320 93.4 640 93.4 960 0C1120 -46.7 1280 46.7 1280 187V0H0Z"
-                        fill="#A3E635"
-                    />
-                </svg>
-            </div>
-
-            <div className="container mx-auto px-4 relative z-10">
-                <div className="flex items-center justify-between h-24">
+            {/* Contenido principal del navbar */}
+            <div className="max-w-[1280px] mx-auto px-8 md:px-[124px] relative z-10">
+                <div className="flex items-center justify-between" style={{ height: '88px', paddingTop: '30px' }}>
                     {/* Logo */}
                     <div className="shrink-0">
-                        <img src={logoUrl} alt="MoneyUp Logo" className="h-10 w-auto" />
+                        <img
+                            src={logoUrl}
+                            alt="MoneyUp Logo"
+                            className="h-[34px] w-auto"
+                            style={{ maxWidth: '194px' }}
+                        />
                     </div>
 
                     {/* Links de navegación - Desktop */}
-                    <div className="hidden md:flex items-center space-x-12">
+                    <div className="hidden md:flex items-center absolute left-1/2 transform -translate-x-1/2" style={{ gap: '138px' }}>
                         {navItems.map((item) => (
                             <button
                                 key={item.id}
                                 onClick={() => handleNavClick(item.id)}
-                                className="text-lime-lightest font-archivo text-lg hover:text-white transition-colors duration-200"
+                                className="text-white font-archivo hover:opacity-80 transition-opacity duration-200 whitespace-nowrap"
+                                style={{ fontSize: '20px', fontWeight: 400 }}
                             >
                                 {item.label}
                             </button>
@@ -75,8 +71,18 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                     </div>
 
                     {/* Botón Descargar */}
-                    <div className="hidden md:block">
-                        <button className="bg-gray-dark text-lime-lightest px-8 py-3 rounded-2xl font-inter font-bold hover:bg-gray-800 transition-colors duration-200">
+                    <div className="hidden md:block shrink-0">
+                        <button
+                            className="font-inter font-bold text-white hover:opacity-90 transition-opacity duration-200"
+                            style={{
+                                backgroundColor: '#1F2937',
+                                padding: '14px 40px',
+                                borderRadius: '20px',
+                                fontSize: '20px',
+                                width: '181px',
+                                height: '58px'
+                            }}
+                        >
                             Descargar
                         </button>
                     </div>
@@ -84,15 +90,15 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                     {/* Botón menú móvil */}
                     <button
                         onClick={toggleMenu}
-                        className="md:hidden text-lime-lightest p-2"
+                        className="md:hidden text-white p-2"
                         aria-label="Toggle menu"
                     >
                         <svg
-                            className="w-6 h-6"
+                            className="w-7 h-7"
                             fill="none"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            strokeWidth="2"
+                            strokeWidth="2.5"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
@@ -107,7 +113,7 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
 
                 {/* Menú móvil */}
                 {state.isMenuOpen && (
-                    <div className="md:hidden pb-4">
+                    <div className="md:hidden pb-6 pt-2">
                         <div className="flex flex-col space-y-4">
                             {navItems.map((item) => (
                                 <button
@@ -116,17 +122,41 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                                         handleNavClick(item.id);
                                         toggleMenu();
                                     }}
-                                    className="text-lime-lightest font-archivo text-left hover:text-white transition-colors duration-200"
+                                    className="text-white font-archivo text-lg text-left hover:opacity-80 transition-opacity duration-200 py-2"
                                 >
                                     {item.label}
                                 </button>
                             ))}
-                            <button className="bg-gray-dark text-lime-lightest px-8 py-3 rounded-2xl font-inter font-bold hover:bg-gray-800 transition-colors duration-200 w-full">
+                            <button
+                                className="bg-gray-800 text-white px-8 py-3 rounded-[20px] font-inter font-bold hover:bg-gray-900 transition-colors duration-200 w-full mt-4"
+                                style={{ backgroundColor: '#1F2937' }}
+                            >
                                 Descargar
                             </button>
                         </div>
                     </div>
                 )}
+            </div>
+
+            {/* Onda decorativa SVG en la parte inferior */}
+            <div
+                className="absolute left-0 right-0 w-full pointer-events-none overflow-visible"
+                style={{
+                    top: '88px',
+                    height: '115px'
+                }}
+            >
+                <svg
+                    viewBox="0 0 1280 187"
+                    className="w-full h-full"
+                    preserveAspectRatio="none"
+                    style={{ display: 'block' }}
+                >
+                    <path
+                        d="M0,20 C213,80 427,120 640,100 C853,80 1067,40 1280,20 L1280,187 L0,187 Z"
+                        fill="white"
+                    />
+                </svg>
             </div>
         </nav>
     );
