@@ -10,8 +10,8 @@ import { memo } from 'react';
  */
 const AboutUs = memo(() => {
     return (
-        <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
+        <div className="pb-16 w-full">
+            <div className="w-full">
                 {/* Hero Section */}
                 <section className="text-center mb-16">
                     <h1 className="font-archivo text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6">
@@ -103,7 +103,7 @@ const AboutUs = memo(() => {
                 </section>
 
                 {/* Call to Action */}
-                <section className="text-center bg-gradient-to-r from-lime-400 to-lime-500 rounded-3xl p-12">
+                <section className="text-center bg-linear-to-r from-lime-400 to-lime-500 rounded-3xl p-12">
                     <h2 className="font-archivo text-3xl sm:text-4xl font-black text-white mb-6">
                         ¿Listo para transformar tus finanzas?
                     </h2>

@@ -82,12 +82,12 @@ const Testimonials = memo(() => {
             ref={ref}
             className="py-16 md:py-24 bg-linear-to-b from-white to-gray-50"
         >
-            <div className="container mx-auto px-4">
+            <div className="w-full">
                 {/* Título */}
                 <div
                     className={`text-center mb-16 transition-all duration-1000 ${isIntersecting
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-10'
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-10'
                         }`}
                 >
                     <h2 className="font-inter font-bold text-3xl md:text-5xl text-gray-800">
@@ -101,8 +101,8 @@ const Testimonials = memo(() => {
                         <div
                             key={testimonial.id}
                             className={`transition-all duration-700 ${isIntersecting && index < visibleCards
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-10'
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-10'
                                 }`}
                         >
                             <TestimonialCard

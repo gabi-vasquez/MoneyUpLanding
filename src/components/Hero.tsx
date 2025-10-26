@@ -31,15 +31,15 @@ const Hero = memo(({ mascotImage, lineImage }: HeroProps) => {
         <section
             id="inicio"
             ref={ref}
-            className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-white"
+            className="relative pb-16 md:pb-24 overflow-hidden bg-white"
         >
-            <div className="container mx-auto px-4">
+            <div className="w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     {/* Columna izquierda - Mascota */}
                     <div
                         className={`relative transition-all duration-1000 ${isIntersecting
-                                ? 'opacity-100 translate-y-0'
-                                : 'opacity-0 translate-y-10'
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
                             }`}
                     >
                         <div className="relative w-full max-w-md mx-auto">
@@ -62,8 +62,8 @@ const Hero = memo(({ mascotImage, lineImage }: HeroProps) => {
                     {/* Columna derecha - Texto */}
                     <div
                         className={`space-y-6 transition-all duration-1000 delay-300 ${isIntersecting
-                                ? 'opacity-100 translate-x-0'
-                                : 'opacity-0 translate-x-10'
+                            ? 'opacity-100 translate-x-0'
+                            : 'opacity-0 translate-x-10'
                             }`}
                     >
                         <h1 className="font-archivo text-4xl md:text-5xl text-black">

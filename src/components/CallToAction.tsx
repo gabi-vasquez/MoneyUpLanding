@@ -57,12 +57,12 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
             ref={ref}
             className="relative py-16 md:py-24 bg-white overflow-hidden"
         >
-            <div className="container mx-auto px-4">
+            <div className="w-full">
                 {/* Texto principal */}
                 <div
                     className={`text-center mb-12 transition-all duration-1000 ${isIntersecting
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-10'
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-10'
                         }`}
                 >
                     <h2 className="font-archivo text-3xl md:text-5xl text-black mb-6">
@@ -80,8 +80,8 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
                 {/* Botones */}
                 <div
                     className={`flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 transition-all duration-1000 delay-300 ${isIntersecting
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-10'
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-10'
                         }`}
                 >
                     {buttons.map((button) => (
@@ -103,8 +103,8 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
                 {/* Imagen del teléfono */}
                 <div
                     className={`relative max-w-md mx-auto transition-all duration-1000 delay-500 ${isIntersecting
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-20'
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-20'
                         }`}
                 >
                     <div className="relative">

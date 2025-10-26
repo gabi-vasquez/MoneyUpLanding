@@ -56,8 +56,8 @@ const Contact = memo(() => {
     }, [formData]);
 
     return (
-        <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
+        <div className="pb-16 w-full">
+            <div className="w-full">
                 {/* Hero Section */}
                 <section className="text-center mb-16">
                     <h1 className="font-archivo text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-6">
@@ -173,7 +173,7 @@ const Contact = memo(() => {
                     <section>
                         <div className="space-y-8">
                             {/* Tarjeta de Email */}
-                            <div className="bg-gradient-to-br from-lime-400 to-lime-500 rounded-3xl p-8 text-white shadow-xl">
+                            <div className="bg-linear-to-br from-lime-400 to-lime-500 rounded-3xl p-8 text-white shadow-xl">
                                 <div className="text-4xl mb-4">📧</div>
                                 <h3 className="font-inter font-bold text-2xl mb-3">
                                     Email

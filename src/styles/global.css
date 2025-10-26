@@ -104,21 +104,76 @@
   @apply transition-colors duration-200;
 }
 
+/**
+ * Sistema de Layout basado en CSS Grid
+ * 
+ * Arquitectura:
+ * - Grid con 3 filas: navbar-spacer, main, footer
+ * - El contenido del main está centrado automáticamente
+ * - Max-width consistente para todo el contenido
+ * - Elimina la necesidad de padding-top en componentes individuales
+ */
+
 .page-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   min-height: 100vh;
 }
 
+/**
+ * Main Content - Sistema de Centrado Robusto
+ * 
+ * Características:
+ * - Display grid para centrado automático del contenido
+ * - Max-width de 1440px (estándar para contenido centrado)
+ * - Padding responsivo horizontal
+ * - Padding top para compensar navbar fija
+ * - Grid único para alinear todo el contenido hijo
+ */
+
 .main-content {
-  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 
+    minmax(1rem, 1fr)           /* Espacio izquierdo dinámico */
+    minmax(auto, 1440px)        /* Contenido centrado con max-width */
+    minmax(1rem, 1fr);          /* Espacio derecho dinámico */
+  width: 100%;
   padding-top: var(--navbar-content-offset);
   min-height: calc(100vh - var(--navbar-content-offset));
 }
 
+/**
+ * Todos los hijos directos del main se colocan en la columna central
+ * Esto asegura que todo el contenido esté centrado automáticamente
+ */
+.main-content > * {
+  grid-column: 2;
+  width: 100%;
+}
+
+/**
+ * En pantallas pequeñas, aumentar el padding horizontal
+ */
+@media (min-width: 640px) {
+  .main-content {
+    grid-template-columns: 
+      minmax(2rem, 1fr)
+      minmax(auto, 1440px)
+      minmax(2rem, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-content {
+    grid-template-columns: 
+      minmax(4rem, 1fr)
+      minmax(auto, 1440px)
+      minmax(4rem, 1fr);
+  }
+}
+
 .footer-container {
   margin-top: var(--footer-spacing);
-  flex-shrink: 0;
 }
 
 .footer-wave-container {
