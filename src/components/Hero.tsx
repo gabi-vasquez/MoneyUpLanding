@@ -1,5 +1,6 @@
 import { memo, useMemo } from 'react';
 import { useIntersection } from '../hooks/useIntersection';
+import { useActiveSection } from '../hooks/useActiveSection';
 
 interface HeroProps {
     mascotImage: string;
@@ -16,6 +17,9 @@ const Hero = memo(({ mascotImage, lineImage }: HeroProps) => {
         triggerOnce: true,
     });
 
+    // Registrar esta sección como visible en el Context
+    useActiveSection('hero');
+
     // useMemo para el contenido del texto
     const content = useMemo(
         () => ({
@@ -29,7 +33,7 @@ const Hero = memo(({ mascotImage, lineImage }: HeroProps) => {
 
     return (
         <section
-            id="inicio"
+            id="hero"
             ref={ref}
             className="relative pb-16 md:pb-24 overflow-hidden bg-white"
         >

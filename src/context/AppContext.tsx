@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useMemo, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useMemo, useEffect, type ReactNode } from 'react';
 
 // Tipos para el contexto
 interface AppState {
@@ -28,6 +28,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
         isMenuOpen: false,
         visibleSections: new Set(),
     });
+
+    // useEffect para aplicar el tema al DOM
+    useEffect(() => {
+        const root = document.documentElement;
+        root.setAttribute('data-theme', state.theme);
+        // Opcional: persistir en localStorage
+        localStorage.setItem('theme', state.theme);
+    }, [state.theme]);
+
+    // useEffect para inicializar el tema desde localStorage
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+        if (savedTheme && savedTheme !== state.theme) {
+            setState((prev) => ({ ...prev, theme: savedTheme }));
+        }
+    }, []);
 
     // useCallback para evitar re-renders innecesarios
     const toggleTheme = useCallback(() => {

@@ -23,22 +23,56 @@
     
     --footer-wave-height: 100px;
     --footer-spacing: var(--footer-wave-height);
+
+    /* Theme Colors - Light Mode (default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --text-inverse: #ffffff;
+    --border-color: #e5e7eb;
+    --navbar-bg: #A3E635;
+    --footer-bg: #A3E635;
+    --button-bg: #1F2937;
+    --button-text: #ffffff;
+    --card-shadow: 0px 4px 7.1px 6px #bef264;
+  }
+
+  /* Dark Mode */
+  :root[data-theme='dark'] {
+    --bg-primary: #111827;
+    --bg-secondary: #1f2937;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-inverse: #1f2937;
+    --border-color: #374151;
+    --navbar-bg: #7AAC28;
+    --footer-bg: #1f2937;
+    --button-bg: #A3E635;
+    --button-text: #1f2937;
+    --card-shadow: 0px 4px 7.1px 6px rgba(163, 230, 53, 0.3);
   }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease;
   }
 
   body {
     font-family: var(--font-inter);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: color 0.3s ease, background-color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-archivo);
+    color: var(--text-primary);
   }
 }
 

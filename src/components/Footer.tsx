@@ -1,4 +1,6 @@
 import { memo, useMemo, useCallback } from 'react';
+import { useAppContext } from '../context/AppContext';
+import { getTranslations } from '../lib/i18n';
 
 interface FooterProps {
     vectorBg: string;
@@ -36,6 +38,10 @@ interface SocialLink {
  * - Background pattern decorativo
  */
 const Footer = memo(({ vectorBg, twitterIcon, instagramIcon, facebookIcon }: FooterProps) => {
+    // Usar el Context para acceder al idioma
+    const { state } = useAppContext();
+    const t = getTranslations(state.language);
+
     // useMemo para los enlaces sociales - Evita recrear el array en cada render
     const socialLinks = useMemo<SocialLink[]>(
         () => [
@@ -72,7 +78,8 @@ const Footer = memo(({ vectorBg, twitterIcon, instagramIcon, facebookIcon }: Foo
 
     return (
         <footer
-            className="footer-container relative bg-gray-dark text-white"
+            className="footer-container relative text-white transition-colors duration-300"
+            style={{ backgroundColor: 'var(--footer-bg)' }}
             role="contentinfo"
             aria-label="Footer"
         >
@@ -92,7 +99,7 @@ const Footer = memo(({ vectorBg, twitterIcon, instagramIcon, facebookIcon }: Foo
                 >
                     <path
                         d="M0,0 Q360,50 720,50 T1440,0 L1440,100 L0,100 Z"
-                        className="fill-gray-dark"
+                        style={{ fill: 'var(--footer-bg)' }}
                     />
                 </svg>
             </div>
@@ -118,13 +125,13 @@ const Footer = memo(({ vectorBg, twitterIcon, instagramIcon, facebookIcon }: Foo
 
                         {/* Descripción */}
                         <p className="font-inter font-extralight text-base sm:text-lg text-white/80 mb-6 sm:mb-8 leading-relaxed">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            {t.footer.description}
                         </p>
 
                         {/* Redes sociales */}
                         <nav
                             className="flex gap-4 mb-8 sm:mb-10"
-                            aria-label="Redes sociales"
+                            aria-label={t.footer.followUs}
                         >
                             {socialLinks.map((social) => (
                                 <a
@@ -154,7 +161,7 @@ const Footer = memo(({ vectorBg, twitterIcon, instagramIcon, facebookIcon }: Foo
                     <div className="border-t border-white/10 pt-6">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                             <p className="font-inter text-xs sm:text-sm text-white/60">
-                                © {currentYear} MoneyUp. Todos los derechos reservados.
+                                {t.footer.copyright}
                             </p>
 
                             {/* Enlaces legales */}
@@ -163,13 +170,13 @@ const Footer = memo(({ vectorBg, twitterIcon, instagramIcon, facebookIcon }: Foo
                                     href="#privacy"
                                     className="font-inter text-xs sm:text-sm text-white/60 hover:text-white transition-colors focus:outline-none focus:underline"
                                 >
-                                    Privacidad
+                                    {t.footer.links.privacy}
                                 </a>
                                 <a
                                     href="#terms"
                                     className="font-inter text-xs sm:text-sm text-white/60 hover:text-white transition-colors focus:outline-none focus:underline"
                                 >
-                                    Términos
+                                    {t.footer.links.terms}
                                 </a>
                             </nav>
                         </div>
