@@ -1,10 +1,5 @@
-import { AppProvider } from '../context/AppContext';
-import Navbar from './Navbar';
-import Hero from './Hero';
-import CallToAction from './CallToAction';
-import Testimonials from './Testimonials';
-import Footer from './Footer';
-import ScrollProgress from './ScrollProgress';
+import PageLayout from './PageLayout';
+import Home from './Home';
 
 interface AppProps {
     assets: {
@@ -20,35 +15,30 @@ interface AppProps {
 }
 
 /**
- * Componente principal App que integra todos los componentes
- * Envuelve todo en el AppProvider para el contexto global
+ * Componente principal App para la página de inicio
+ * Utiliza PageLayout para el layout común (Navbar, Footer)
+ * y Home para el contenido específico
+ * 
+ * Refactorizado para seguir principios:
+ * - DRY: Reutiliza PageLayout en lugar de repetir Navbar/Footer
+ * - Single Responsibility: Solo compone layout + contenido
+ * - Clean Code: Estructura clara y mantenible
  */
 export default function App({ assets }: AppProps) {
     return (
-        <AppProvider>
-            <div className="min-h-screen bg-white">
-                <ScrollProgress />
-                <Navbar logoUrl={assets.logoUrl} />
-
-                <main>
-                    <Hero
-                        mascotImage={assets.mascotImage}
-                        lineImage={assets.lineImage}
-                    />
-
-                    <CallToAction phoneImage={assets.phoneImage} />
-
-                    <Testimonials />
-                </main>
-
-                <Footer
-                    vectorBg={assets.vectorBg}
-                    twitterIcon={assets.twitterIcon}
-                    instagramIcon={assets.instagramIcon}
-                    facebookIcon={assets.facebookIcon}
-                />
-            </div>
-        </AppProvider>
+        <PageLayout
+            logoUrl={assets.logoUrl}
+            vectorBg={assets.vectorBg}
+            twitterIcon={assets.twitterIcon}
+            instagramIcon={assets.instagramIcon}
+            facebookIcon={assets.facebookIcon}
+        >
+            <Home
+                mascotImage={assets.mascotImage}
+                lineImage={assets.lineImage}
+                phoneImage={assets.phoneImage}
+            />
+        </PageLayout>
     );
 }
 

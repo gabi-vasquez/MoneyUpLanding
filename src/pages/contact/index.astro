@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ContactPage from "../../components/ContactPage";
+
+// Assets compartidos para todas las páginas
+const assets = {
+  logoUrl:
+    "https://www.figma.com/api/mcp/asset/a82700d8-e923-42cc-9235-10daee15a571",
+  vectorBg:
+    "https://www.figma.com/api/mcp/asset/81239b6c-71ac-4be5-8f66-f092b5bc59f9",
+  twitterIcon:
+    "https://www.figma.com/api/mcp/asset/77313e80-b909-4f86-8118-1f919567b25e",
+  instagramIcon:
+    "https://www.figma.com/api/mcp/asset/fcb7772e-f37b-4b2e-91e4-4b65605522f4",
+  facebookIcon:
+    "https://www.figma.com/api/mcp/asset/d4e65d20-5a31-4810-98a3-0c1ed123c085",
+};
+---
+
+<Layout title="Contacto - MoneyUp">
+  <ContactPage client:load assets={assets} />
+</Layout>
