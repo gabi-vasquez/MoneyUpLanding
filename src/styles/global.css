@@ -32,11 +32,13 @@
   }
 
   body {
-    @apply font-inter antialiased;
+    font-family: var(--font-inter);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-archivo;
+    font-family: var(--font-archivo);
   }
 }
 
@@ -100,8 +102,15 @@
   }
 }
 
-* {
-  @apply transition-colors duration-200;
+/**
+ * Transiciones para elementos interactivos específicos
+ * Usando CSS nativo en lugar de @apply para evitar conflictos con Tailwind CSS v4
+ * NOTA: No aplicamos estilos a 'button' para evitar interferir con clases de utilidad
+ */
+a, input, select, textarea {
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
 
 /**
