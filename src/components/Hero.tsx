@@ -1,6 +1,8 @@
 import { memo, useMemo } from 'react';
 import { useIntersection } from '../hooks/useIntersection';
 import { useActiveSection } from '../hooks/useActiveSection';
+import { useAppContext } from '../context/AppContext';
+import { getTranslations } from '../lib/i18n';
 
 interface HeroProps {
     mascotImage: string;
@@ -10,8 +12,12 @@ interface HeroProps {
 /**
  * Componente Hero con animaciones y custom hooks
  * Implementa: memo, useMemo, useIntersection (custom hook)
+ * Soporte para múltiples idiomas y tema claro/oscuro
  */
 const Hero = memo(({ mascotImage, lineImage }: HeroProps) => {
+    const { state } = useAppContext();
+    const t = getTranslations(state.language);
+
     const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
         threshold: 0.2,
         triggerOnce: true,
@@ -20,22 +26,27 @@ const Hero = memo(({ mascotImage, lineImage }: HeroProps) => {
     // Registrar esta sección como visible en el Context
     useActiveSection('hero');
 
-    // useMemo para el contenido del texto
+    // useMemo para el contenido del texto - traducido
     const content = useMemo(
         () => ({
             title: 'MoneyUP',
-            description: 'aplicacion para controlar\ntus ingresos y egresos.',
-            subtitle: 'Ideal para',
-            feature: 'definir metas de ahorro.',
+            description: state.language === 'es'
+                ? 'aplicacion para controlar\ntus ingresos y egresos.'
+                : 'app to track your\nincome and expenses.',
+            subtitle: state.language === 'es' ? 'Ideal para' : 'Ideal for',
+            feature: state.language === 'es'
+                ? 'definir metas de ahorro.'
+                : 'setting savings goals.',
         }),
-        []
+        [state.language]
     );
 
     return (
         <section
             id="hero"
             ref={ref}
-            className="relative pb-16 md:pb-24 overflow-hidden bg-white"
+            className="relative pb-16 md:pb-24 overflow-hidden"
+            style={{ backgroundColor: 'var(--bg-primary)' }}
         >
             <div className="w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -70,19 +81,19 @@ const Hero = memo(({ mascotImage, lineImage }: HeroProps) => {
                             : 'opacity-0 translate-x-10'
                             }`}
                     >
-                        <h1 className="font-archivo text-4xl md:text-5xl text-black">
+                        <h1 className="font-archivo text-4xl md:text-5xl" style={{ color: 'var(--text-primary)' }}>
                             {content.title}
                         </h1>
 
-                        <p className="font-inter text-2xl md:text-3xl text-gray-800 leading-relaxed whitespace-pre-line">
+                        <p className="font-inter text-2xl md:text-3xl leading-relaxed whitespace-pre-line" style={{ color: 'var(--text-secondary)' }}>
                             {content.description}
                         </p>
 
                         <div className="pt-8">
-                            <h2 className="font-archivo text-3xl md:text-4xl text-black mb-4">
+                            <h2 className="font-archivo text-3xl md:text-4xl mb-4" style={{ color: 'var(--text-primary)' }}>
                                 {content.subtitle}
                             </h2>
-                            <p className="font-inter text-2xl md:text-3xl text-gray-800">
+                            <p className="font-inter text-2xl md:text-3xl" style={{ color: 'var(--text-secondary)' }}>
                                 {content.feature}
                             </p>
                         </div>

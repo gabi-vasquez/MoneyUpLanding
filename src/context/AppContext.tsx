@@ -20,30 +20,40 @@ interface AppContextType {
 // Crear el contexto
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+// Función para obtener el tema inicial desde localStorage
+function getInitialTheme(): 'light' | 'dark' {
+    if (typeof window === 'undefined') return 'light';
+    const savedTheme = localStorage.getItem('theme');
+    return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light';
+}
+
+// Función para obtener el idioma inicial desde localStorage
+function getInitialLanguage(): 'es' | 'en' {
+    if (typeof window === 'undefined') return 'es';
+    const savedLanguage = localStorage.getItem('language');
+    return (savedLanguage === 'es' || savedLanguage === 'en') ? savedLanguage : 'es';
+}
+
 // Provider del contexto
 export function AppProvider({ children }: { children: ReactNode }) {
     const [state, setState] = useState<AppState>({
-        theme: 'light',
-        language: 'es',
+        theme: getInitialTheme(),
+        language: getInitialLanguage(),
         isMenuOpen: false,
         visibleSections: new Set(),
     });
 
-    // useEffect para aplicar el tema al DOM
+    // useEffect para aplicar el tema al DOM y persistir en localStorage
     useEffect(() => {
         const root = document.documentElement;
         root.setAttribute('data-theme', state.theme);
-        // Opcional: persistir en localStorage
         localStorage.setItem('theme', state.theme);
     }, [state.theme]);
 
-    // useEffect para inicializar el tema desde localStorage
+    // useEffect para persistir el idioma en localStorage
     useEffect(() => {
-        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-        if (savedTheme && savedTheme !== state.theme) {
-            setState((prev) => ({ ...prev, theme: savedTheme }));
-        }
-    }, []);
+        localStorage.setItem('language', state.language);
+    }, [state.language]);
 
     // useCallback para evitar re-renders innecesarios
     const toggleTheme = useCallback(() => {

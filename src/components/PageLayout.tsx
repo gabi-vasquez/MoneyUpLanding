@@ -50,7 +50,7 @@ export default function PageLayout({
 }: PageLayoutProps) {
     return (
         <AppProvider>
-            <div className="page-container bg-white">
+            <div className="page-container" style={{ backgroundColor: 'var(--bg-primary)' }}>
                 <ScrollProgress />
                 <Navbar logoUrl={logoUrl} />
                 <main className="main-content">

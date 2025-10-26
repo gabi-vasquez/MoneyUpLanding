@@ -1,5 +1,7 @@
 import { memo, useCallback, useMemo, useState } from 'react';
 import { useIntersection } from '../hooks/useIntersection';
+import { useAppContext } from '../context/AppContext';
+import { getTranslations } from '../lib/i18n';
 import { cn } from '../lib/utils';
 
 interface CallToActionProps {
@@ -9,8 +11,12 @@ interface CallToActionProps {
 /**
  * Componente CTA con estado y callbacks optimizados
  * Implementa: useState, memo, useCallback, useMemo, useIntersection
+ * Soporte para múltiples idiomas y tema claro/oscuro
  */
 const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
+    const { state } = useAppContext();
+    const t = getTranslations(state.language);
+
     const [hoveredButton, setHoveredButton] = useState<string | null>(null);
     const { ref, isIntersecting } = useIntersection<HTMLDivElement>({
         threshold: 0.3,
@@ -29,34 +35,38 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
     // useCallback para el click de los botones
     const handleButtonClick = useCallback((action: string) => {
         console.log(`Action clicked: ${action}`);
+        if (action === 'start') {
+            window.location.href = '/download/';
+        }
         // Aquí puedes agregar la lógica de navegación o descarga
     }, []);
 
-    // useMemo para los datos de los botones
+    // useMemo para los datos de los botones - traducidos
     const buttons = useMemo(
         () => [
             {
                 id: 'start',
-                label: 'Empieza ahora',
-                bgColor: 'bg-lime-custom',
-                hoverColor: 'hover:bg-lime-green',
-                textColor: 'text-gray-dark',
+                label: state.language === 'es' ? 'Empieza ahora' : 'Start now',
+                bgColor: '#a3e635',
+                hoverColor: '#84cc16',
+                textColor: '#1f2937',
             },
             {
                 id: 'docs',
-                label: 'Documentación',
-                bgColor: 'bg-black',
-                hoverColor: 'hover:bg-gray-dark',
-                textColor: 'text-lime-lightest',
+                label: state.language === 'es' ? 'Documentación' : 'Documentation',
+                bgColor: 'var(--button-bg)',
+                hoverColor: '#374151',
+                textColor: 'var(--button-text)',
             },
         ],
-        []
+        [state.language]
     );
 
     return (
         <section
             ref={ref}
-            className="relative py-16 md:py-24 bg-white overflow-hidden"
+            className="relative py-16 md:py-24 overflow-hidden"
+            style={{ backgroundColor: 'var(--bg-primary)' }}
         >
             <div className="w-full">
                 {/* Texto principal */}
@@ -66,15 +76,17 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
                         : 'opacity-0 translate-y-10'
                         }`}
                 >
-                    <h2 className="font-archivo text-3xl md:text-5xl text-black mb-6">
-                        ¿Necesitas ayuda para manejar tus{' '}
-                        <span className="text-lime-custom">ingresos</span> y{' '}
-                        <span className="text-lime-custom">egresos</span>?
+                    <h2 className="font-archivo text-3xl md:text-5xl mb-6" style={{ color: 'var(--text-primary)' }}>
+                        {state.language === 'es'
+                            ? <>¿Necesitas ayuda para manejar tus <span style={{ color: '#a3e635' }}>ingresos</span> y <span style={{ color: '#a3e635' }}>egresos</span>?</>
+                            : <>Need help managing your <span style={{ color: '#a3e635' }}>income</span> and <span style={{ color: '#a3e635' }}>expenses</span>?</>
+                        }
                     </h2>
-                    <p className="font-inter text-xl md:text-3xl text-gray-800 opacity-70 max-w-3xl mx-auto">
-                        Descarga MoneyUp y tu vida
-                        <br />
-                        financiera se volvera mas llevadera
+                    <p className="font-inter text-xl md:text-3xl opacity-70 max-w-3xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+                        {state.language === 'es'
+                            ? <>Descarga MoneyUp y tu vida<br />financiera se volvera mas llevadera</>
+                            : <>Download MoneyUp and your<br />financial life will become easier</>
+                        }
                     </p>
                 </div>
 
@@ -98,13 +110,19 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
                                 // Base styles
                                 'px-12 py-5 rounded-2xl font-archivo text-2xl md:text-3xl',
                                 'transition-all duration-300 transform',
-                                // Button-specific colors
-                                button.bgColor,
-                                button.hoverColor,
-                                button.textColor,
                                 // Conditional hover state
                                 hoveredButton === button.id ? 'scale-105 shadow-2xl' : 'shadow-lg'
                             )}
+                            style={{
+                                backgroundColor: button.bgColor,
+                                color: button.textColor,
+                            }}
+                            onMouseOver={(e) => {
+                                e.currentTarget.style.backgroundColor = button.hoverColor;
+                            }}
+                            onMouseOut={(e) => {
+                                e.currentTarget.style.backgroundColor = button.bgColor;
+                            }}
                         >
                             {button.label}
                         </button>
@@ -124,8 +142,13 @@ const CallToAction = memo(({ phoneImage }: CallToActionProps) => {
                             alt="MoneyUp App Preview"
                             className="w-full h-auto drop-shadow-2xl"
                         />
-                        {/* Gradient overlay para efecto fade */}
-                        <div className="absolute inset-0 bg-linear-to-t from-white via-transparent to-transparent pointer-events-none" />
+                        {/* Gradient overlay para efecto fade - se adapta al tema */}
+                        <div
+                            className="absolute inset-0 pointer-events-none"
+                            style={{
+                                background: `linear-gradient(to top, var(--bg-primary), transparent)`
+                            }}
+                        />
                     </div>
                 </div>
             </div>
