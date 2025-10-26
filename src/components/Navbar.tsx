@@ -93,9 +93,9 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                             onClick={toggleTheme}
                             className="text-white hover:opacity-80 transition-opacity duration-200 p-2"
                             aria-label={state.theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'}
-                            title={state.theme === 'light' ? 'Modo oscuro' : 'Modo claro'}
+                            title={state.theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
                         >
-                            {state.theme === 'light' ? (
+                            {state.theme === 'dark' ? (
                                 // Icono Luna
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
@@ -115,7 +115,7 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                             aria-label={state.language === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}
                             title={state.language === 'es' ? 'English' : 'Español'}
                         >
-                            {state.language === 'es' ? '🇺🇸 EN' : '🇪🇸 ES'}
+                            {state.language === 'en' ? '🇺🇸 EN' : '🇪🇸 ES'}
                         </button>
 
                         {/* Botón Descargar */}
@@ -217,7 +217,7 @@ const Navbar = memo(({ logoUrl }: NavbarProps) => {
                                     className="text-white hover:opacity-80 transition-opacity duration-200 px-4 py-3 rounded-lg font-inter font-semibold bg-white/10"
                                     aria-label={state.language === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'}
                                 >
-                                    {state.language === 'es' ? '🇺🇸 EN' : '🇪🇸 ES'}
+                                    {state.language === 'en' ? '🇪🇸 ES' : '🇺🇸 EN'}
                                 </button>
                             </div>
 

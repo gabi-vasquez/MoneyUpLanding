@@ -79,7 +79,7 @@ const Footer = memo(({ vectorBg, twitterIcon, instagramIcon, facebookIcon }: Foo
     return (
         <footer
             className="footer-container relative text-white transition-colors duration-300"
-            style={{ backgroundColor: 'var(--footer-bg)' }}
+            style={{ backgroundColor: '#1f2937' }}
             role="contentinfo"
             aria-label="Footer"
         >
@@ -99,7 +99,7 @@ const Footer = memo(({ vectorBg, twitterIcon, instagramIcon, facebookIcon }: Foo
                 >
                     <path
                         d="M0,0 Q360,50 720,50 T1440,0 L1440,100 L0,100 Z"
-                        style={{ fill: 'var(--footer-bg)' }}
+                        style={{ fill: '#1f2937' }}
                     />
                 </svg>
             </div>
